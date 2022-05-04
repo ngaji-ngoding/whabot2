@@ -9,26 +9,19 @@ class Command {
     if (fs.existsSync("./commands/" + pesan[0] + ".js")) {
       this.#command = pesan[0];
       pesan.shift();
-      this.#command = require("../commands/" + this.#command + ".js");
-      this.#command = new this.#command();
-      if (this.#command[pesan[0]]) {
-        this.#option = pesan[0];
-        pesan.shift();
-        if (pesan.length > 0) {
-          this.#data = pesan;
-          this.#command[this.#option](data);
-        } else {
-          this.#command[this.#option]();
-        }
-      }else{
-      this.#command[this.#option]();
-      }
-    } else {
-      this.#command = require("../commands/" + this.#command + ".js");
-      this.#command = new this.#command();
-      this.#command[this.#option]();
     }
+    if (this.#command[pesan[0]]) {
+      this.#option = pesan[0];
+      pesan.shift();
+    }
+    if (pesan.length > 0) {
+      this.#data = pesan;
+    }
+    this.#command = require("../commands/" + this.#command + ".js");
+    this.#command = new this.#command();
+    this.#command[this.#option](this.#data);
   }
 }
 
 module.exports = Command;
+
