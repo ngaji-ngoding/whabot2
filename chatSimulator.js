@@ -7,7 +7,7 @@ const Command = require("./utilities/Command.js");
 
 function chat() {
   rl.question('masukkan pesan anda:\n', (pesan)=> {
-    new Command(pesan);
+    new Command().getCommand(pesan);
     chat();
   });
 }

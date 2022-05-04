@@ -1,8 +1,7 @@
 class Info {
-  constructor() {
-    console.log(this);
+  help() {
+    console.log("info help");
   }
 }
 
 module.exports = Info;
-

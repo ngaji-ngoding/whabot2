@@ -1,8 +1,11 @@
 const Command = require("../utilities/Command");
 
 class Test extends Command {
+  constructor(pesan) {
+    super(pesan);
+  }
   help() {
-    console.log(this);
+    console.log("test help");
   }
 }
 
