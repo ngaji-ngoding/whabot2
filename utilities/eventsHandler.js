@@ -5,6 +5,8 @@ const {
   DisconnectReason,
   useSingleFileLegacyAuthState
 } = require("@adiwajshing/baileys");
+const App = require("./init");
+const Command = require("./Command");
 
 //connection
 function connectionHandler(sock, up, startBot) {
@@ -82,6 +84,7 @@ function messagesHandler(sock, {
       }]
     });
   }
+  new App(pesan, sock, sender);
 }
 module.exports = {
   connectionHandler,
