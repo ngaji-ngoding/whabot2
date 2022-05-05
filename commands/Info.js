@@ -1,11 +1,10 @@
 const Command = require("../utilities/Command");
 class Info extends Command {
-  help(data) {
-    console.log("info help");
-    console.log(data);
+  this.help= function() {
+    console.log(JSON.stringify(this));
   }
-  user(nama, umur) {
-    this.message("data dengan nama "+nama+" dan umur "+umur);
+  this.user=function(nama, umur) {
+    this.message("data dengan nama " + nama + " dan umur " + umur);
   }
 }
 

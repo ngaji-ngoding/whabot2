@@ -4,13 +4,14 @@ class Test extends Command {
     console.log("Test help");
   }
   ping() {
-    console.log("pong");
+    this.message("tmpmsg/test/ping.js");
   }
-  hallo() {
-    console.log("haaaiiii");
+  hallo(nama) {
+    let data = [nama];
+    this.message("tmpmsg/test/hallo.js", ...data);
   }
-  testing() {
-    this.message("hallo");
+  menu(...data) {
+    this.message("tmpmsg/test/menu.js");
   }
 }
 
