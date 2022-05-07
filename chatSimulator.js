@@ -3,7 +3,6 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-const Command = require("./utilities/Command.js");
 const App = require("./utilities/init");
 
 function sock() {

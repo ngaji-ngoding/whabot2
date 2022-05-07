@@ -6,11 +6,14 @@ class Command {
     this.#sender = sender;
   }
   message(file, ...data) {
-    let text = this.tmpmsg(file, ...data);
-    this.#sock.sendMessage(this.#sender, JSON.stringify(text));
+    let text = this.tmpmsg(file, ...data).text;
+    this.#sock.sendMessage(this.#sender, text);
   }
   tmpmsg(file, ...data) {
     return require("../" + file)(...data);
+  }
+  getDatabase(file) {
+    return require("../databases/" + file);
   }
 }
 
