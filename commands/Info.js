@@ -8,8 +8,10 @@ class Info extends Command {
   };
   user = function () {
     const db = this.getDatabase("users.json");
-    console.table(db);
-    db.forEach((d) => console.log(d));
+    let nama = db.map((n) => n.nama);
+    let email = db.map((e) => e.email);
+    let data = [nama, email];
+    this.message("info/user.js", ...data);
   };
   bot(...prop) {
     let db = this.getDatabase("bot.json");
@@ -19,7 +21,8 @@ class Info extends Command {
     } else {
       data = db;
     }
-    this.message("tplmsg/info/bot.js", data);
+    data = Object.entries(data);
+    this.message("info/bot.js", data);
   }
 }
 
