@@ -3,8 +3,10 @@ const fs = require("fs");
 class Info extends Command {
   help = function () {
     let menu = fs.readdirSync("./commands/");
-    menu = menu.map((m) => m);
-    console.log(menu);
+    let i = 1;
+    menu = menu.map((m) =>(i++)+". *"+ m.replace(".js", "")+"*");
+    menu = menu.toString().replace(/,/gm, "\n");
+    this.message("info/menu.js", menu);
   };
   user = function () {
     const db = this.getDatabase("users.json");

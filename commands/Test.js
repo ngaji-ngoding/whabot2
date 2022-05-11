@@ -1,7 +1,7 @@
 const Command = require("../utilities/Command");
 class Test extends Command {
   help() {
-    console.log("Test help");
+    this.message("test help");
   }
   ping() {
     this.message("test/ping.js");
