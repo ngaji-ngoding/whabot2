@@ -1,14 +1,14 @@
 const Command = require("../utilities/Command");
 const fs = require("fs");
 class Info extends Command {
-  help = function () {
+  help() {
     let menu = fs.readdirSync("./commands/");
     let i = 1;
     menu = menu.map((m) =>(i++)+". *"+ m.replace(".js", "")+"*");
     menu = menu.toString().replace(/,/gm, "\n");
     this.message("info/menu.js", menu);
   };
-  user = function () {
+  user() {
     const db = this.getDatabase("users.json");
     let nama = db.map((n) => n.nama);
     let email = db.map((e) => e.email);

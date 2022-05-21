@@ -1,7 +1,10 @@
 const Command = require("../utilities/Command");
 class Test extends Command {
   help() {
-    this.message("test help");
+    let option = Object.getOwnPropertyNames(Object.getPrototypeOf(this));
+    option.shift();
+    option = option.toString().replace(/,/gm, "\n");
+    this.message("option yg tersedia untuk command Test adalah\n"+option);
   }
   ping() {
     this.message("test/ping.js");

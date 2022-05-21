@@ -1,29 +1,30 @@
 const {
   connectionHandler,
   messagesHandler,
-  useSingleFileLegacyAuthState
+  useSingleFileAuthState
 } = require("./utilities/eventsHandler");
 const {
-  makeWALegacySocket
-} = require("@adiwajshing/baileys");
-const {
-  state,
-  saveState
-} = useSingleFileLegacyAuthState("./sessions.json");
+  default: makeWASocket
+  } = require("@adiwajshing/baileys");
 
-function startBot(argument) {
-  const sock = makeWALegacySocket({
-    printQRInTerminal: true,
-    auth: state
-  });
-  //connection
-  sock.ev.on("connection.update", (up)=>connectionHandler(sock, up, startBot));
-  // state atau session
-  sock.ev.on("creds.update",
-    saveState);
-  // autorespond
-  sock.ev.on("messages.upsert",
-    (m)=> messagesHandler(sock, m))
-}
+  const {
+    state,
+    saveState
+  } = useSingleFileAuthState("./sessions.json");
 
-startBot();
+  function startBot(argument) {
+    const sock = makeWASocket({
+      printQRInTerminal: true,
+      auth: state
+    });
+    console.log(sock);
+    //connection
+    sock.ev.on("connection.update", (up)=>connectionHandler(sock, up, startBot));
+    // state atau session
+    sock.ev.on("creds.update", m=>console.log(m));
+    // autorespond
+    sock.ev.on("messages.upsert",
+      (m)=> messagesHandler(sock, m))
+  }
+
+  startBot();

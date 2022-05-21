@@ -12,7 +12,6 @@ class Command {
     }else{
       text = {text:file};
     }
-    console.log(text);
     this.#sock.sendMessage(this.#sender, text);
   }
   tmpmsg(file, ...data) {
