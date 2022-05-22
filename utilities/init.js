@@ -1,6 +1,6 @@
 const fs = require("fs");
 class App {
-  #command = "Test";
+  #command = "Info";
   #option = "help";
   #data = [];
   constructor(pesan, sock, sender) {

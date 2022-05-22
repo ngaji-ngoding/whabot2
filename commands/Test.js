@@ -13,7 +13,7 @@ class Test extends Command {
     let data = [nama];
     this.message("test/hallo.js", ...data);
   }
-  menu(...data) {
+  menu() {
     let db = this.getDatabase("menu.json");
     this.message("test/menu.js", db);
   }
