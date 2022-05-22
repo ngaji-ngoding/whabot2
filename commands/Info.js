@@ -1,6 +1,6 @@
 class Info {
   constructor() {
-    console.log(this);
+    console.log("ini command info");
   }
 }
 

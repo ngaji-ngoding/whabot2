@@ -15,9 +15,7 @@ class Command {
     if (fs.existsSync("./commands/" + this.#command + ".js")) {
       this.#command = require("../commands/" + this.#command + ".js");
       this.#command = new this.#command();
-    }
-    this.#command[this.#option]();
-  }
+    }}
 }
 
 module.exports = Command;
