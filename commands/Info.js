@@ -1,7 +1,7 @@
 const Command = require("../utilities/Command");
 const fs = require("fs");
 class Info extends Command {
-  showCommand(){
+  show_command(){
 let menu = fs.readdirSync("./commands/");
     let i = 1;
     menu = menu.map((m) =>(i++)+". *"+ m.replace(".js", "")+"*");
@@ -9,11 +9,11 @@ let menu = fs.readdirSync("./commands/");
     this.message("info/menu.js", menu);
   }
   help() {
-    this.showCommand();
+    this.show_command();
 let option = Object.getOwnPropertyNames(Object.getPrototypeOf(this));
     option.shift();
     option = option.toString().replace(/,/gm, "\n");
-    this.message("option yg tersedia untuk command Test adalah\n"+option);
+    this.message("option yg tersedia untuk command Info adalah\n"+option);
 
   };
   user() {

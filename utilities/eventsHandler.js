@@ -19,8 +19,6 @@ function connectionHandler(sock, up, startBot) {
   }
   if (connection === "close") {
     let reason = new Boom(lastDisconnect?.error)?.output?.statusCode;
-    console.log(reason);
-    console.log(DisconnectReason);
     if (reason === DisconnectReason.badSession) {
       console.log(`bad file session, please delete it. dan scan again`);
     } else if (reason === DisconnectReason.connectionClosed) {

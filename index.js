@@ -6,7 +6,7 @@ const {
 const {
   default: makeWASocket
   } = require("@adiwajshing/baileys");
-
+  const P = require("pino");
   const {
     state,
     saveState
@@ -15,9 +15,11 @@ const {
   function startBot(argument) {
     const sock = makeWASocket({
       printQRInTerminal: true,
-      auth: state
+      auth: state,
+      Logger: P({
+        levle: 'debug'
+      })
     });
-    console.log(sock);
     //connection
     sock.ev.on("connection.update", (up)=>connectionHandler(sock, up, startBot));
     // state atau session
