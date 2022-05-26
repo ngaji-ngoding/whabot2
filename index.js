@@ -1,20 +1,22 @@
 const {
   connectionHandler,
   messagesHandler,
-  useSingleFileLegacyAuthState
+  useSingleFileAuthState
 } = require("./utilities/eventsHandler");
 const {
-  makeWALegacySocket
+  default:makeWASocket
 } = require("@adiwajshing/baileys");
 const {
   state,
   saveState
-} = useSingleFileLegacyAuthState("./sessions.json");
+} = useSingleFileAuthState("./sessions.json");
+const P = require("pino");
 
 function startBot(argument) {
-  const sock = makeWALegacySocket({
+  const sock = makeWASocket({
     printQRInTerminal: true,
-    auth: state
+    auth: state,
+    Logger: P({level:50})
   });
   //connection
   sock.ev.on("connection.update", (up)=>connectionHandler(sock, up, startBot));

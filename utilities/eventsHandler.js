@@ -3,7 +3,7 @@ const {
 } = require("@hapi/boom");
 const {
   DisconnectReason,
-  useSingleFileLegacyAuthState
+  useSingleFileAuthState
 } = require("@adiwajshing/baileys");
 
 //connection
@@ -86,5 +86,5 @@ function messagesHandler(sock, {
 module.exports = {
   connectionHandler,
   messagesHandler,
-  useSingleFileLegacyAuthState
+  useSingleFileAuthState
 }
