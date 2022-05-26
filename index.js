@@ -12,11 +12,11 @@ const {
 } = useSingleFileAuthState("./sessions.json");
 const P = require("pino");
 
-function startBot(argument) {
+function startBot() {
   const sock = makeWASocket({
     printQRInTerminal: true,
     auth: state,
-    Logger: P({level:50})
+    Logger: P({level:'error'})
   });
   //connection
   sock.ev.on("connection.update", (up)=>connectionHandler(sock, up, startBot));
