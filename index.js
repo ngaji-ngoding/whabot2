@@ -16,7 +16,6 @@ function startBot() {
   const sock = makeWASocket({
     printQRInTerminal: true,
     auth: state,
-    Logger: P({level:'error'})
   });
   //connection
   sock.ev.on("connection.update", (up)=>connectionHandler(sock, up, startBot));
