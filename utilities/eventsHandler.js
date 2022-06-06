@@ -1,24 +1,19 @@
-const {
-  Boom
-} = require("@hapi/boom");
+const { Boom } = require("@hapi/boom");
 const {
   DisconnectReason,
-  useSingleFileAuthState
+  useSingleFileAuthState,
 } = require("@adiwajshing/baileys");
+
+const App = require("./App.js");
 
 //connection
 function connectionHandler(sock, up, startBot) {
-  const {
-    lastDisconnect,
-    connection
-  } = up;
+  const { lastDisconnect, connection } = up;
   if (connection) {
-    console.log("connection status: "+connection);
+    console.log("connection status: " + connection);
   }
   if (connection === "close") {
     let reason = new Boom(lastDisconnect?.error)?.output?.statusCode;
-    console.log(reason);
-    console.log(DisconnectReason);
     if (reason === DisconnectReason.badSession) {
       console.log(`bad file session, please delete it. dan scan again`);
     } else if (reason === DisconnectReason.connectionClosed) {
@@ -28,7 +23,9 @@ function connectionHandler(sock, up, startBot) {
       console.log("connection lost from server, reconnecting.....");
       startBot();
     } else if (reason === DisconnectReason.connectionReplaced) {
-      console.log("connection replaced, another new session opened, please close current session first");
+      console.log(
+        "connection replaced, another new session opened, please close current session first"
+      );
     } else if (reason === DisconnectReason.loggedOut) {
       console.log("device loged out, please delete session and scan again");
       sock.logout();
@@ -39,52 +36,55 @@ function connectionHandler(sock, up, startBot) {
       console.log("connection time out, reconnecting...");
       startBot();
     } else {
-      sock.end('unknown DisconnectReason')
+      sock.end("unknown DisconnectReason");
     }
   }
 }
 
 //messages
-function messagesHandler(sock, {
-  messages, type
-}) {
+function messagesHandler(sock, { messages, type }) {
   let pesan;
   let sender = messages[0].key.remoteJid;
   if (messages[0].message) {
     pesan = messages[0].message.conversation;
   }
-  if (sender === 'status@broadcast' || messages[0].key.fromMe) return;
-  if (pesan === 'ping') {
+  if (sender === "status@broadcast" || messages[0].key.fromMe) return;
+  new App(pesan, sock, sender);
+  if (pesan === "ping") {
     sock.sendMessage(sender, {
-      text: 'pong'
+      text: "pong",
     });
   }
-  if (pesan === 'hallo') {
+  if (pesan === "hallo") {
     sock.sendMessage(sender, {
-      text: 'haaaiiii'
+      text: "haaaiiii",
     });
   }
-  if (pesan === 'menu') {
+  if (pesan === "menu") {
     sock.sendMessage(sender, {
-      text: 'ini daftar menu',
-      title: 'menu',
-      buttonText: 'tampilkan menu',
-      sections: [{
-        title: 'menus',
-        rows: [{
-          title: 'kopi',
-          rowId: '1'
+      text: "ini daftar menu",
+      title: "menu",
+      buttonText: "tampilkan menu",
+      sections: [
+        {
+          title: "menus",
+          rows: [
+            {
+              title: "kopi",
+              rowId: "1",
+            },
+            {
+              title: "susu",
+              rowId: "2",
+            },
+          ],
         },
-          {
-            title: 'susu',
-            rowId: '2'
-          }]
-      }]
+      ],
     });
   }
 }
 module.exports = {
   connectionHandler,
   messagesHandler,
-  useSingleFileAuthState
-}
+  useSingleFileAuthState,
+};
