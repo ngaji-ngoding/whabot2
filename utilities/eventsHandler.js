@@ -45,11 +45,15 @@ function connectionHandler(sock, up, startBot) {
 function messagesHandler(sock, { messages, type }) {
   let pesan;
   let sender = messages[0].key.remoteJid;
+  let namaSender;
+  if (messages[0].pushName) {
+    namaSender = messages[0].pushName;
+  }
   if (messages[0].message) {
     pesan = messages[0].message.conversation;
   }
   if (sender === "status@broadcast" || messages[0].key.fromMe) return;
-  new App(pesan, sock, sender);
+  new App(pesan, sock, sender, namaSender);
   if (pesan === "ping") {
     sock.sendMessage(sender, {
       text: "pong",

@@ -1,10 +1,10 @@
 const Command = require("../utilities/Command.js");
 class Info extends Command {
   help() {
-    this.message({ text: "ini command info dengan option help" });
+    this.message("info/help.js", this.nama);
   }
   user() {
-    this.message({ text: "ini command info dengan option user" });
+    this.message("ini command info dengan option user");
   }
 }
 

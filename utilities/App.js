@@ -3,13 +3,13 @@ class App {
   #command = "Info";
   #option = "help";
   #data = [];
-  constructor(pesan, sock, sender) {
+  constructor(pesan, sock, ...dataSender) {
     pesan = pesan.split(" ");
     if (fs.existsSync("./commands/" + pesan[0] + ".js")) {
       this.#command = pesan[0];
     }
     this.#command = require("../commands/" + this.#command + ".js");
-    this.#command = new this.#command(sock, sender);
+    this.#command = new this.#command(sock, ...dataSender);
     pesan.shift();
     if (this.#command[pesan[0]]) {
       this.#option = pesan[0];

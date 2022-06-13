@@ -1,13 +1,20 @@
 class Command {
   #sock = null;
   #sender = null;
-  constructor(sock, sender) {
+  constructor(sock, ...dataSender) {
     this.#sock = sock;
-    this.#sender = sender;
+    this.#sender = dataSender[0];
+    this.nama = dataSender[1];
   }
 
-  message(pesan) {
-    this.#sock.sendMessage(this.#sender, pesan);
+  message(pesan, ...data) {
+    let file;
+    if (pesan.endsWith(".js")) {
+      file = require("../messages/" + pesan)(...data);
+    } else {
+      file = { text: pesan };
+    }
+    this.#sock.sendMessage(this.#sender, file);
   }
 }
 
