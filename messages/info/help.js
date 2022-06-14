@@ -1,8 +1,12 @@
-module.exports = function (nama) {
+module.exports = function (nama, commands, options) {
   return {
     text:
       "hallo " +
       nama +
-      "!!! selamat datang di bot *NGAJI NGODING*\n\nfitur yang tersedia adalah sebagai berikut\n\n*Info*\n*Test*\n\noption yang tersedia untuk fitur *Info* adalah\n*help*\n*user*\n\nselamat mencoba fitur fitur bot ini!!!\nterima kasih",
+      "!!! selamat datang di bot *NGAJI NGODING*\n\nfitur yang tersedia adalah sebagai berikut\n" +
+      commands +
+      "\n\noption yang tersedia untuk fitur *Info* adalah\n" +
+      options +
+      "\n\nselamat mencoba fitur fitur bot ini!!!\nterima kasih",
   };
 };
