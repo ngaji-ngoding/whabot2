@@ -53,7 +53,14 @@ function messagesHandler(sock, { messages, type }) {
     pesan = messages[0].message.conversation;
   }
   if (sender === "status@broadcast" || messages[0].key.fromMe) return;
-  new App(pesan, sock, sender, namaSender);
+  const prefixs = ["!", "#", "*"];
+  for (p in prefixs) {
+    if (pesan.split("")[0] === prefixs[p]) {
+      pesan = pesan.substring(1);
+
+      new App(pesan, sock, sender, namaSender);
+    }
+  }
   if (pesan === "ping") {
     sock.sendMessage(sender, {
       text: "pong",
