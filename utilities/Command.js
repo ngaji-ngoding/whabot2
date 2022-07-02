@@ -16,6 +16,10 @@ class Command {
     }
     this.#sock.sendMessage(this.#sender, file);
   }
+  dbFs(namaFile) {
+    const DB = require("./database.js");
+    return new DB(namaFile);
+  }
 }
 
 module.exports = Command;
