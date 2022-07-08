@@ -4,11 +4,14 @@ class Members extends Command {
     this.message("ini helper Members");
   }
   join(email) {
+    const nama = this.nama;
+    const noHp = this.sender;
     this.dbFs("members.json").insertData({
-      nama: this.nama,
-      noHp: this.noHp,
+      nama,
+      noHp,
       email,
       level: "basic",
     });
   }
 }
+module.exports = Members;

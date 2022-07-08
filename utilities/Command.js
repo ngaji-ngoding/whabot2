@@ -1,9 +1,9 @@
 class Command {
   #sock = null;
-  #sender = null;
+  sender = null;
   constructor(sock, ...dataSender) {
     this.#sock = sock;
-    this.#sender = dataSender[0];
+    this.sender = dataSender[0];
     this.nama = dataSender[1];
   }
 
@@ -14,7 +14,7 @@ class Command {
     } else {
       file = { text: pesan };
     }
-    this.#sock.sendMessage(this.#sender, file);
+    this.#sock.sendMessage(this.sender, file);
   }
   dbFs(namaFile) {
     const DB = require("./database.js");
