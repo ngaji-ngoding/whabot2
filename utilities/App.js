@@ -4,6 +4,8 @@ class App {
   #option = "help";
   #data = [];
   constructor(pesan, sock, ...dataSender) {
+    pesan = pesan[0].toUpperCase() + pesan.substring(1).toLowerCase();
+    pesan = pesan.replace("\n", " ");
     pesan = pesan.split(" ");
     if (fs.existsSync("./commands/" + pesan[0] + ".js")) {
       this.#command = pesan[0];
