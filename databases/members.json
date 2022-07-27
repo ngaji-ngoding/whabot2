@@ -1,1 +1,14 @@
-[{"nama":"MIRUPABOT","noHp":"6281334811143","email":"bli@g.cpm","level":"basic"},{"nama":"MIRUPABOT","noHp":"6281334811143","email":"asd@gmail.com","level":"basic"}]
+[
+  {
+    "nama": "MIRUPABOT",
+    "noHp": "6281334811143",
+    "email": "bli@g.cpm",
+    "level": "basic"
+  },
+  {
+    "nama": "MIRUPABOT",
+    "noHp": "6281334811143",
+    "email": "asd@gmail.com",
+    "level": "basic"
+  }
+]
