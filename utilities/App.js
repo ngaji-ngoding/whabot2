@@ -5,7 +5,7 @@ class App {
   #data = [];
   constructor(pesan, sock, ...dataSender) {
     pesan = pesan[0].toUpperCase() + pesan.substring(1).toLowerCase();
-    pesan = pesan.replace("\n", " ");
+    pesan = pesan.replace(/\n+/, " ");
     pesan = pesan.split(" ");
     if (fs.existsSync("./commands/" + pesan[0] + ".js")) {
       this.#command = pesan[0];
@@ -18,9 +18,22 @@ class App {
     }
     pesan.shift();
     if (pesan.length > 0) {
-      this.#data = pesan;
+      pesan = pesan.join(" ");
+      const keyValuePatrn = /--([a-zA-Z\d_]+) *(=|:) *([a-zA-Z@. ]+)/g;
+      let data = {},
+        d;
+      while ((d = keyValuePatrn.exec(pesan))) {
+        data[d[1]] = d[3];
+      }
+      console.log(data);
+      if (Object.getOwnPropertyNames(data).length < 1) {
+        this.#data = pesan.split(" ");
+        this.#command[this.#option](...this.#data);
+      } else {
+        this.#data = data;
+        this.#command[this.#option](this.#data);
+      }
     }
-    this.#command[this.#option](...this.#data);
   }
 }
 

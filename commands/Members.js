@@ -22,5 +22,14 @@ class Members extends Command {
       this.message("data berhasil disimpan");
     }
   }
+  registrasi({ email, alamat }) {
+    const nama = this.nama;
+    this.dbFs("peserta.json").insertData({
+      nama,
+      email: email,
+      alamat: alamat,
+    });
+    this.message("terima kasih telah mendaftar");
+  }
 }
 module.exports = Members;
