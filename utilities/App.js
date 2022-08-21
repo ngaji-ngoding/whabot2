@@ -25,7 +25,6 @@ class App {
       while ((d = keyValuePatrn.exec(pesan))) {
         data[d[1]] = d[3];
       }
-      console.log(data);
       if (Object.getOwnPropertyNames(data).length < 1) {
         this.#data = pesan.split(" ");
         this.#command[this.#option](...this.#data);
