@@ -31,5 +31,12 @@ class Members extends Command {
     });
     this.message("terima kasih telah mendaftar");
   }
+  infoall() {
+    let datas = this.dbFs("members.json").getDatas();
+    this.message("berikut adalah data email yang terdaftar :");
+    datas.forEach((data) => {
+      this.message("email : " + data.email);
+    });
+  }
 }
 module.exports = Members;

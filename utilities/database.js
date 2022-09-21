@@ -2,17 +2,31 @@ const fs = require("fs");
 
 class Dbfs {
   #namaDir = "databases";
+  #path = null;
   constructor(namaFile) {
-    this.namaFile = namaFile;
-    if (!fs.existsSync(this.#namaDir)) {
-      fs.mkdirSync(this.#namaDir);
+    if (namaFile) {
+      this.namaFile = namaFile;
+    } else {
+      this.namaFile = "data.json";
     }
-    if (!fs.existsSync(this.#namaDir + "/" + namaFile)) {
-      fs.writeFileSync(this.#namaDir + "/" + namaFile, "[]");
-    }
+    this.#path = this.#namaDir + "/" + this.namaFile;
+  }
+  #chekDb() {
+    return fs.existsSync(this.#path);
+  }
+  #createDb() {
+    fs.writeFileSync(this.#path, "[]");
   }
   insertData(data) {
-    if (fs.existsSync(this.#namaDir + "/" + this.namaFile)) {
+    if (this.#chekDb()) {
+      let dataMembers = require("../" + this.#namaDir + "/" + this.namaFile);
+      dataMembers.push(data);
+      fs.writeFileSync(
+        this.#namaDir + "/" + this.namaFile,
+        JSON.stringify(dataMembers)
+      );
+    } else {
+      this.#createDb();
       let dataMembers = require("../" + this.#namaDir + "/" + this.namaFile);
       dataMembers.push(data);
       fs.writeFileSync(
@@ -20,6 +34,9 @@ class Dbfs {
         JSON.stringify(dataMembers)
       );
     }
+  }
+  getDatas() {
+    return require("../" + this.#path);
   }
 }
 module.exports = Dbfs;

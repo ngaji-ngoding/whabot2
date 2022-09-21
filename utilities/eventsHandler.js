@@ -57,7 +57,6 @@ function messagesHandler(sock, { messages, type }) {
   for (p in prefixs) {
     if (pesan.split("")[0] === prefixs[p]) {
       pesan = pesan.substring(1);
-
       new App(pesan, sock, sender, namaSender);
     }
   }

@@ -4,9 +4,11 @@ const {
   useSingleFileAuthState,
 } = require("./utilities/eventsHandler");
 const { default: makeWASocket } = require("@adiwajshing/baileys");
+require("dotenv").config();
 const { state, saveState } = useSingleFileAuthState("./sessions.json");
 const P = require("pino");
 
+console.log(process.env);
 function startBot() {
   const sock = makeWASocket({
     printQRInTerminal: true,

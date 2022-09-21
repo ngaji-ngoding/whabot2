@@ -33,6 +33,7 @@ class App {
         this.#command[this.#option](this.#data);
       }
     }
+    this.#command[this.#option]();
   }
 }
 
